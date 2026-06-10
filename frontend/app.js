@@ -903,17 +903,15 @@ async function loadAdminUsers() {
 // Cambia il testo del bottone da 👁 a 🙈
 // -------------------------------------------------------------------
 
-window.togglePassword = function(id, btn) {
-    const input = document.getElementById(id);
+document.querySelectorAll(".show-pass-btn").forEach(btn => {
+  btn.addEventListener("click", () => {
+    const input = document.getElementById(btn.dataset.target);
 
-    if (input.type === "password") {
-        input.type = "text";
-        btn.textContent = "🙈";
-    } else {
-        input.type = "password";
-        btn.textContent = "👁";
-    }
-};
+    const isHidden = input.type === "password";
+    input.type = isHidden ? "text" : "password";
+    btn.textContent = isHidden ? "🙈" : "👁";
+  });
+});
 
 // -------------------------------------------------------------------
 // getCarouselLayout()
