@@ -588,7 +588,22 @@ app.post("/admin/removeCopies", (req, res) => {
 
 app.delete("/admin/deleteBook", (req, res) => {
   const { bookId } = req.body;
-  
+
+   db.get("SELECT copies FROM books WHERE id = ?", [bookId], (err, row) => {
+    if (err) return res.status(500).json({ error: err.message });
+    if (!row) return res.status(404).json({ error: "Libro non trovato" });
+    
+    if (row.copies - copies < 0) {
+      return res.status(400).json({ error: "Non puoi rimuovere più copie di quelle disponibili" });
+    }
+    
+    db.run("UPDATE books SET copies = copies - ? WHERE id = ?", [copies, bookId], (err) => {
+      if (err) return res.status(500).json({ error: err.message });
+      res.json({ success: true });
+    });
+  });
+});
+/*
   db.serialize(() => {
     // prima elimino tutti i prestiti associati a questo libro
     db.run("DELETE FROM loans WHERE bookId = ?", [bookId]);
@@ -606,7 +621,7 @@ app.delete("/admin/deleteBook", (req, res) => {
       res.json({ success: true });
     });
   });
-});
+});*/
 
 // ==============================================
 // SECTION 18: API ADMIN - TUTTI I PRESTITI (GET /admin/allLoans)
