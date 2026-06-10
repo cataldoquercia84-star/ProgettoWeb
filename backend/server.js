@@ -586,23 +586,21 @@ app.post("/admin/removeCopies", (req, res) => {
 // SECTION 17: API ADMIN - ELIMINA LIBRO (DELETE /admin/deleteBook)
 // ==============================================
 
+
 app.delete("/admin/deleteBook", (req, res) => {
   const { bookId } = req.body;
 
-   db.get("SELECT copies FROM books WHERE id = ?", [bookId], (err, row) => {
+  db.run("UPDATE books SET copies = 0 WHERE id = ?", [bookId], function (err) {
     if (err) return res.status(500).json({ error: err.message });
-    if (!row) return res.status(404).json({ error: "Libro non trovato" });
-    
-    if (row.copies - copies < 0) {
-      return res.status(400).json({ error: "Non puoi rimuovere più copie di quelle disponibili" });
+
+    if (this.changes === 0) {
+      return res.status(404).json({ error: "Libro non trovato" });
     }
-    
-    db.run("UPDATE books SET copies = 0 WHERE id = ?", [copies, bookId], (err) => {
-      if (err) return res.status(500).json({ error: err.message });
-      res.json({ success: true });
-    });
+
+    res.json({ success: true });
   });
 });
+
 /*
   db.serialize(() => {
     // prima elimino tutti i prestiti associati a questo libro
