@@ -1,0 +1,699 @@
+/* VARIABILI GLOBALI (colori principali) */
+/* --nero: sfondo scuro per header/footer */
+/* --oro: accenti, bordi e pulsanti importanti */
+/* --avorio: sfondo principale della pagina */
+/* --rosso-esaurito: sfondo rosso chiaro per libri con 0 copie */
+/* --bordo-esaurito: bordo rosso per libri esauriti */
+:root {
+  --nero: #0d0d0d;
+  --oro: #b08968;
+  --avorio: #f5f1e8;
+  --grigio-museo: #2f3e46;
+  --rosso-esaurito: #ffe0e0;
+  --bordo-esaurito: #cc0000;
+}
+
+/* RESET e impostazioni base */
+/* * toglie margini e padding a TUTTI gli elementi */
+/* box-sizing: border-box fa sì che larghezza includa padding e bordo */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Georgia", serif;
+}
+
+/* html e body: sfondo avorio, altezza minima tutta la finestra */
+html, body {
+  margin: 0;
+  padding: 0;
+  background: var(--avorio);
+  min-height: 100vh;
+}
+
+/* ==================== HEADER (BARRA SUPERIORE) ==================== */
+/* topbar: layout flessibile, logo a sinistra, bottoni a destra */
+/* justify-content: space-between spinge gli elementi ai lati opposti */
+.topbar {
+  width: 100%;
+  background: var(--nero);
+  color: var(--avorio);
+  padding: 8px 25px;
+  border-bottom: 4px solid var(--oro);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-sizing: border-box;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+/* logo: altezza fissa 48px */
+.logo {
+  height: 48px;
+  display: block;
+}
+
+/* brand-title: titolo principale della biblioteca */
+.brand-title {
+  font-size: 30px;
+  letter-spacing: 2px;
+  color: var(--avorio);
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* topbar-right: contiene stato server, messaggio benvenuto e bottone */
+.topbar-right {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+/* welcome-msg: messaggio "Benvenuto, Mario" color oro */
+.welcome-msg {
+  color: var(--oro);
+  font-size: 14px;
+}
+
+/* server-online: testo verde chiaro */
+.server-online {
+  color: #8ef58e;
+  font-weight: bold;
+}
+
+/* server-offline: testo rosso */
+.server-offline {
+  color: #ff6b6b;
+  font-weight: bold;
+}
+
+/* bottone Accedi/Logout: trasparente con bordo bianco */
+.topbar-right button {
+  background: transparent;
+  border: 1px solid #f5f1e8;
+  padding: 8px 16px;
+  border-radius: 4px;
+  color: #f5f1e8;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+/* hover del bottone: sfondo bianco, testo scuro */
+.topbar-right button:hover {
+  background: #f5f1e8;
+  color: #2f3e46;
+}
+
+/* ==================== CONTENITORE PRINCIPALE E FOOTER ==================== */
+/* container: larghezza massima 1500px, centrato con margin: auto */
+.container {
+  max-width: 1500px;
+  margin: 10px auto;
+  padding: 0 20px;
+}
+
+/* footer: nero con bordo oro sopra */
+.footer {
+  width: 100%;
+  background: var(--nero);
+  color: var(--avorio);
+  text-align: center;
+  padding: 20px;
+  border-top: 4px solid var(--oro);
+  box-sizing: border-box;
+  margin-top: 30px;
+}
+
+/* ==================== CARD GENERICA RIUTILIZZABILE ==================== */
+/* card: sfondo bianco caldo, ombra leggera, bordi arrotondati */
+.card {
+  background: #fffdf7;
+  padding: 25px;
+  margin: 20px 0;
+  border-radius: 8px;
+  border: 1px solid #d6c7b2;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+/* titolo h2 dentro card: nero, centrato, margine sotto */
+.card h2 {
+  color: var(--nero);
+  margin-bottom: 20px;
+  font-size: 28px;
+  text-align: center;
+}
+
+/* titolo h3 dentro card */
+.card h3 {
+  color: var(--nero);
+  margin: 15px 0 10px 0;
+  font-size: 20px;
+}
+
+/* ==================== MODULI LOGIN E REGISTRAZIONE ==================== */
+/* pannelli login/registrazione: larghezza massima 500px, centrati */
+#login-panel, #register-panel {
+  max-width: 500px;
+  margin: 20px auto;
+  padding: 30px;
+  border-radius: 10px;
+}
+
+/* input-group: position relative per posizionare bottone occhio */
+.input-group {
+  position: relative;
+  margin-bottom: 20px;
+}
+
+/* stile input per login, registrazione e admin */
+#login-panel input, #register-panel input,
+#admin-section input[type="text"], #admin-section input[type="number"] {
+  width: 100%;
+  padding: 12px;
+  font-size: 16px;
+  border: 2px solid #b08968;
+  border-radius: 6px;
+  background: #fffdf7;
+  color: #2b2b2b;
+  margin-bottom: 10px;
+}
+
+/* bottone occhio per mostrare/nascondere password */
+/* position: absolute lo posiziona dentro l'input */
+.show-pass-btn {
+  position: absolute;
+  right: 12px;
+  top: 40%;
+  transform: translateY(-50%);
+  background: transparent;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  color: #b08968;
+}
+
+/* bottone login principale: nero con bordo oro */
+.login-btn {
+  width: 100%;
+  padding: 15px;
+  font-size: 18px;
+  background: #0d0d0d;
+  color: #f5f1e8;
+  border: 2px solid #b08968;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: all 0.3s ease;
+}
+
+/* hover bottone login: inverti colori */
+.login-btn:hover {
+  background: #b08968;
+  color: #0d0d0d;
+}
+
+/* link per switchare tra login/registrazione */
+.switch-auth {
+  margin-top: 15px;
+  font-size: 16px;
+  text-align: center;
+}
+
+.switch-auth a {
+  color: #b08968;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+/* ==================== CONTROLLI DI ORDINAMENTO (SORTING) ==================== */
+/* sort-controls: pulsanti allineati a destra */
+.sort-controls {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+/* singolo pulsante di ordinamento */
+.sort-btn {
+  background: var(--nero);
+  color: var(--avorio);
+  border: 1px solid var(--oro);
+  padding: 6px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: all 0.2s;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* hover pulsante ordinamento */
+.sort-btn:hover {
+  background: var(--oro);
+  color: var(--nero);
+}
+
+/* pulsante attivo (ordinamento selezionato) */
+.sort-btn.active {
+  background: var(--oro);
+  color: var(--nero);
+  border-color: var(--nero);
+}
+
+/* ==================== CAROSELLO ==================== */
+/* carousel-container: flessibile, centrato, con frecce laterali */
+.carousel-container {
+  display: flex;
+  align-items: center;
+  position: relative;
+  width: 100%;
+  gap: 10px;
+}
+
+/* carousel: scroll orizzontale, nasconde barra scorrimento */
+.carousel {
+  display: flex;
+  gap: 20px;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  width: 100%;
+  padding: 15px 5px;
+  scrollbar-width: none;  /* Firefox: nasconde barra */
+}
+
+/* Chrome/Safari: nasconde barra scorrimento */
+.carousel::-webkit-scrollbar {
+  display: none;
+}
+
+/* singola card del libro nel carosello */
+/* background-size: cover fa sì che l'immagine copra tutta la card */
+.item-card {
+  width: 280px;
+  min-width: 280px;
+  height: 400px;
+  background-size: cover;
+  background-position: center;
+  border-radius: 8px;
+  border: 1px solid #d6c7b2;
+  box-shadow: 0 6px 16px rgba(0,0,0,0.15);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  position: relative;
+  overflow: hidden;
+}
+
+/* overlay sul libro: gradiente dal nero a trasparente */
+/* permette di leggere il testo anche su immagini chiare */
+.book-overlay {
+  background: linear-gradient(to top, rgba(0,0,0,0.95), rgba(0,0,0,0.4));
+  padding: 15px;
+}
+
+/* titolo del libro nell'overlay */
+.book-overlay strong {
+  font-size: 1.15em;
+  display: block;
+  margin-bottom: 6px;
+  color: #ffffff;
+}
+
+/* autore del libro nell'overlay */
+.book-overlay small {
+  font-size: 0.9em;
+  color: #e0e0e0;
+  display: block;
+  margin-bottom: 8px;
+}
+
+/* numero copie nell'overlay */
+.book-overlay span {
+  font-size: 0.85em;
+  color: var(--oro);
+  font-weight: bold;
+}
+
+/* frecce laterali del carosello */
+.carousel-btn {
+  background: var(--nero);
+  color: var(--avorio);
+  border: 2px solid var(--oro);
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s;
+  z-index: 10;
+  flex-shrink: 0;
+}
+
+/* hover frecce carosello */
+.carousel-btn:hover {
+  background: var(--oro);
+  color: var(--nero);
+}
+
+/* contenitore dei pallini sotto il carosello */
+.scroll-dots-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 15px;
+  width: 100%;
+}
+
+/* gruppo di pallini */
+.scroll-dots {
+  display: flex;
+  gap: 12px;
+}
+
+/* singolo pallino */
+.scroll-dot {
+  width: 10px;
+  height: 10px;
+  background-color: #d6c7b2;
+  border-radius: 50%;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+/* pallino attivo: diventa una pillola allungata */
+.scroll-dot.active {
+  background-color: var(--oro);
+  width: 28px;
+  border-radius: 5px;
+}
+
+/* ==================== STILE CARD PRESTITI E MINIATURE ==================== */
+/* card base per prestiti e libri (utente loggato) */
+.loan-card {
+  display: flex !important;
+  align-items: center !important;
+  gap: 20px;
+  background: #fffdf7;
+  padding: 15px;
+  margin-bottom: 12px;
+  border: 1px solid #d6c7b2;
+  border-radius: 6px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.03);
+  transition: all 0.2s;
+}
+
+/* STILE PER LIBRO ESAURITO (COPIE = 0) */
+/* sfondo rosso chiaro + bordo rosso a sinistra */
+.loan-card.esaurito {
+  background-color: var(--rosso-esaurito) !important;
+  border-left: 6px solid var(--bordo-esaurito) !important;
+  border-color: var(--bordo-esaurito) !important;
+  opacity: 0.9;
+}
+
+/* testo per libro esaurito: rosso scuro per leggibilità */
+.loan-card.esaurito .book-info,
+.loan-card.esaurito strong,
+.loan-card.esaurito small,
+.loan-card.esaurito span {
+  color: #5a0000 !important;
+}
+
+/* miniatura del libro (copertina piccola) */
+.book-thumbnail {
+  width: 55px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 4px;
+  border: 1px solid var(--oro);
+  box-shadow: 0 2px 5px rgba(0,0,0,0.12);
+  flex-shrink: 0;
+}
+
+/* area info del libro (titolo, autore, scadenza) */
+.book-info {
+  flex-grow: 1;
+  text-align: left;
+}
+
+/* bottoni generici dentro loan-card e admin-box */
+.loan-card button, .admin-box button {
+  background: var(--nero);
+  color: var(--avorio);
+  border: 1px solid var(--oro);
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+/* hover bottoni */
+.loan-card button:hover, .admin-box button:hover {
+  background: var(--oro);
+  color: var(--nero);
+}
+
+/* BADGE COLORATI PER SCADENZA PRESTITI */
+/* bordo sinistro colorato in base ai giorni rimanenti */
+.loan-status-ok { border-left: 6px solid #2a9d8f; }      /* verde: >10 giorni */
+.loan-status-attenzione { border-left: 6px solid #e9c46a; } /* giallo: 5-10 giorni */
+.loan-status-urgente { border-left: 6px solid #f4a261; }   /* arancione: 1-5 giorni */
+.loan-status-scaduto { border-left: 6px solid #e76f51; background: #fff1f0; } /* rosso: scaduto */
+
+/* admin-box: bottoni e input per gestire copie */
+.admin-box {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+/* input numerici per quantità copie */
+.admin-box input {
+  width: 60px;
+  padding: 6px;
+  border-radius: 4px;
+  border: 1px solid var(--oro);
+  text-align: center;
+}
+
+/* Pulsante di rimozione copie (colore rosso) */
+.admin-box .remove-btn {
+  background: #8b0000;
+  border-color: #5a0000;
+}
+.admin-box .remove-btn:hover {
+  background: #a52a2a;
+}
+
+/* Pulsante elimina libro (accanto al titolo) */
+.delete-book-btn {
+  background: #8b0000;
+  margin-left: 10px;
+  border: none;
+  border-radius: 4px;
+  padding: 2px 6px;
+  font-size: 12px;
+  cursor: pointer;
+  color: white;
+}
+.delete-book-btn:hover {
+  background: #a52a2a;
+}
+
+/* ==================== PRESTITI ANNIDATI (AREA ADMIN) ==================== */
+/* sottosezione prestiti per ogni libro (indentata) */
+.admin-sub-loans {
+  margin-left: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+/* singola riga prestito nella lista admin */
+.sub-loan-row {
+  background: #ffffff;
+  padding: 10px 15px;
+  border: 1px solid #e6dbca;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+}
+
+/* messaggio "nessun prestito attivo" */
+.sub-loan-empty {
+  font-size: 0.9em;
+  color: #777777;
+  font-style: italic;
+  padding-left: 5px;
+  margin-bottom: 5px;
+}
+
+/* ==================== MODALE CAMBIO PASSWORD ==================== */
+/* modale: sfondo scuro che copre tutta la pagina */
+.modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.7);
+  z-index: 1000;
+  justify-content: center;
+  align-items: center;
+}
+
+/* contenuto del modale: bianco, centrato, con bordo oro */
+.modal-content {
+  background: var(--avorio);
+  border-radius: 12px;
+  padding: 25px;
+  max-width: 400px;
+  width: 90%;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+  border: 2px solid var(--oro);
+}
+
+.modal-content h3 {
+  margin-bottom: 20px;
+  color: var(--nero);
+}
+
+.modal-content input {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 15px;
+  border: 2px solid var(--oro);
+  border-radius: 6px;
+  font-size: 16px;
+}
+
+.modal-content button {
+  width: 100%;
+  padding: 12px;
+  background: var(--nero);
+  color: var(--avorio);
+  border: 1px solid var(--oro);
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.modal-content button:hover {
+  background: var(--oro);
+  color: var(--nero);
+}
+
+/* MODALE PER PASSWORD TEMPORANEA (con bottone copia) */
+.temp-password-box {
+  display: flex;
+  gap: 10px;
+  margin: 15px 0;
+  align-items: center;
+}
+
+/* input della password temporanea (solo lettura) */
+#temp-password-display {
+  flex: 1;
+  background: #f0f0f0;
+  font-family: monospace;
+  font-size: 18px;
+  text-align: center;
+}
+
+/* bottone copia password */
+#copy-temp-password-btn {
+  background: var(--oro);
+  color: var(--nero);
+  border: none;
+  padding: 8px 12px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+#copy-temp-password-btn:hover {
+  background: var(--nero);
+  color: var(--avorio);
+}
+
+/* ==================== LISTA UTENTI (ADMIN) ==================== */
+/* lista di tutti gli utenti registrati */
+.users-list {
+  margin-top: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* singolo utente nella lista */
+.user-item {
+  background: #fffdf7;
+  padding: 10px 15px;
+  border: 1px solid #d6c7b2;
+  border-radius: 6px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* ruolo utente (Admin/Utente) color oro */
+.user-role {
+  font-weight: bold;
+  color: var(--oro);
+}
+
+/* ==================== UTILITY GLOBALI ==================== */
+/* hidden: nasconde qualsiasi elemento (usato da JavaScript) */
+.hidden { display: none !important; }
+
+/* alert errore server (rosso) */
+.server-alert {
+  background: #ffe3e3;
+  color: #b71c1c;
+  border: 1px solid #ffbaba;
+  padding: 12px;
+  text-align: center;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* ==================== RESPONSIVE DESIGN ==================== */
+/* regole per schermi più piccoli di 768px (tablet e telefono) */
+@media (max-width: 768px) {
+  /* card più piccole su mobile */
+  .item-card {
+    width: 220px;
+    min-width: 220px;
+    height: 320px;
+  }
+  /* titolo più piccolo */
+  .brand-title { font-size: 22px; }
+  /* logo più piccolo */
+  .logo { height: 35px; }
+  /* padding ridotto nell'header */
+  .topbar { padding: 10px; }
+  /* card prestiti diventa verticale su mobile */
+  .loan-card {
+    flex-direction: column;
+    text-align: center;
+    gap: 10px;
+  }
+  /* bottoni admin centrati su mobile */
+  .admin-box {
+    justify-content: center;
+    width: 100%;
+  }
+  /* indentazione ridotta per prestiti annidati */
+  .admin-sub-loans {
+    margin-left: 15px;
+  }
+}
