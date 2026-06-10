@@ -4,7 +4,9 @@ CODEX HUB - BIBLIOTECA DIGITALE
 COME SI INSTALLA (in locale)
 
 -Apri il terminale nella cartella backend  
+
 -Installa le dipendenze:
+
    npm install
 -Avvia il server:
    npm start
