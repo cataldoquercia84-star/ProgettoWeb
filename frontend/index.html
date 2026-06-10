@@ -105,10 +105,16 @@
       
       <div class="input-group">
 
-<input type="password" id="pwd">
-<button  onmousedown="showPassword('pwd')"   onmouseup="hidePassword('pwd')"   onmouseleave="hidePassword('pwd')">  👁</button>
-
-      </div>
+<div class="input-group">
+  <input type="password" id="login-pwd" placeholder="Password">
+  <button  
+    onmousedown="showPassword('login-pwd')"  
+    onmouseup="hidePassword('login-pwd')"  
+    onmouseleave="hidePassword('login-pwd')"
+    ontouchstart="showPassword('login-pwd')"  
+    ontouchend="hidePassword('login-pwd')"
+  >👁</button>
+</div>
       
       <button class="login-btn" onclick="login()">Accedi</button>
       <!-- bottone principale di login -->
@@ -131,16 +137,26 @@
     <div id="register-panel" class="card hidden">
       <h2>Registrati</h2>
       
-      <div class="input-group">
-        <input id="register-user" type="text" placeholder="Scegli un username (es. Mario99)">
-        <!-- placeholder più descrittivo per guidare l'utente -->
-      </div>
-      
-      <div class="input-group">
-       <input type="password" id="pwd">
-<button  onmousedown="showPassword('pwd')"   onmouseup="hidePassword('pwd')"   onmouseleave="hidePassword('pwd')">  👁</button>
-      </div>
-      
+
+<div class="input-group">
+  <input id="login-user" type="text" placeholder="Nome utente">
+</div>
+<div class="input-group">
+  <input id="register-user" type="text" placeholder="Scegli un username (es. Mario99)">
+</div>
+
+<div class="input-group">
+  <input type="password" id="register-pwd" placeholder="Password">
+  <button  
+    onmousedown="showPassword('register-pwd')"  
+    onmouseup="hidePassword('register-pwd')"  
+    onmouseleave="hidePassword('register-pwd')"
+    ontouchstart="showPassword('register-pwd')"  
+    ontouchend="hidePassword('register-pwd')"
+  >👁</button>
+</div>
+
+
       <button class="login-btn" onclick="register()">Crea Account</button>
       
       <p class="switch-auth">
