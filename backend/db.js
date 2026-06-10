@@ -69,7 +69,7 @@ db.get("SELECT COUNT(*) as count FROM books", [], (err, row) => {
       ["Orgoglio e Pregiudizio", "Jane Austen", 6, "/uploads/book3.jpg"],
       ["Moby Dick", "Herman Melville", 3, "/uploads/book4.jpg"],
       ["I Promessi Sposi", "Alessandro Manzoni", 7, "/uploads/book5.jpg"],
-      ["Harry Potter - La pietra Filosofale", "J.K. Rowling", 8, "/uploads/book6.jpg"],
+      ["Harry Potter e La pietra Filosofale", "J.K. Rowling", 8, "/uploads/book6.jpg"],
       ["Il Nome della Rosa", "Umberto Eco", 4, "/uploads/book7.jpg"],
       ["La Divina Commedia", "Dante Alighieri", 5, "/uploads/book8.jpg"],
       ["Il Piccolo Principe", "Antoine de Saint-Exupéry", 9, "/uploads/book9.jpg"],
