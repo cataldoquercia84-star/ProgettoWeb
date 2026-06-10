@@ -684,9 +684,9 @@ async function loadAdminInventory() {
           <span>Disponibilità scaffale: <strong>${book.copies}</strong> copie in sede</span>
         </div>
         <div class="admin-box">
-          <input type="number" id="add-qty-${book.id}" value="1" min="1" style="width:50px;">
+          <input type="number" id="add-qty-${book.id}" value="1" min="1" style="width:70px;">
           <button onclick="addCopies(${book.id})">➕ Rifornisci</button>
-          <input type="number" id="remove-qty-${book.id}" value="1" min="1" style="width:50px;">
+          <input type="number" id="remove-qty-${book.id}" value="1" min="1" style="width:70px;">
           <button class="remove-btn" onclick="removeCopies(${book.id})">➖ Rimuovi copia</button>
         </div>
       `;
