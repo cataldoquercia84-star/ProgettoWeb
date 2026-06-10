@@ -831,14 +831,14 @@ async function removeCopies(bookId) {
 // Chiede conferma con confirm()
 // -------------------------------------------------------------------
 async function deleteBook(bookId) {
-  if (!confirm("Eliminare questo libro e tutti i prestiti associati?")) return;
+  if (!confirm("Eliminare tutte le copie del libro?")) return;
   try {
     await fetch(`${API_URL}/admin/deleteBook`, {
       method: "DELETE",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ bookId })
     });
-    alert("Libro eliminato.");
+    alert("Copie azzerate.");
     loadAdminInventory();
     loadAdminStats();
   } catch { showServerError(); }
