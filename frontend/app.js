@@ -903,27 +903,22 @@ async function loadAdminUsers() {
 // Cambia il testo del bottone da 👁 a 🙈
 // -------------------------------------------------------------------
 
-document.querySelectorAll(".show-pass-btn").forEach(btn => {
-  const input = document.getElementById(btn.dataset.target);
+document.addEventListener("DOMContentLoaded", () => {
 
-  function show() {
-    input.type = "text";
-    btn.textContent = "🙈";
-  }
+  document.querySelectorAll(".show-pass-btn").forEach(btn => {
 
-  function hide() {
-    input.type = "password";
-    btn.textContent = "👁";
-  }
+    btn.addEventListener("click", () => {
+      const input = document.getElementById(btn.dataset.target);
 
-  // Desktop
-  btn.addEventListener("mousedown", show);
-  btn.addEventListener("mouseup", hide);
-  btn.addEventListener("mouseleave", hide);
+      const isHidden = input.type === "password";
 
-  // Mobile
-  btn.addEventListener("touchstart", show);
-  btn.addEventListener("touchend", hide);
+      input.type = isHidden ? "text" : "password";
+
+      btn.textContent = isHidden ? "🙈" : "👁";
+    });
+
+  });
+
 });
 
 // -------------------------------------------------------------------
