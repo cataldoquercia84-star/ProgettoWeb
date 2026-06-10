@@ -5,6 +5,7 @@
   "main": "server.js",
   "scripts": {
     "start": "node server.js"
+    "postinstall":"mpm rebuild sqlite3 --build-from-source"
   },
   "dependencies": {
     "bcrypt": "^5.1.1",
