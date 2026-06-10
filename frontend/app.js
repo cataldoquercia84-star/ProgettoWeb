@@ -886,16 +886,17 @@ async function loadAdminUsers() {
 // Mostra/nasconde la password nel campo input
 // Cambia il testo del bottone da 👁 a 🙈
 // -------------------------------------------------------------------
-function togglePassword(id, btn) {
+
+function showPassword(id) {
   const input = document.getElementById(id);
-  if (input.type === "password") {
-    input.type = "text";
-    btn.textContent = "🙈";
-  } else {
-    input.type = "password";
-    btn.textContent = "👁";
-  }
+  input.type = "text";
 }
+
+function hidePassword(id) {
+  const input = document.getElementById(id);
+  input.type = "password";
+}
+
 
 // -------------------------------------------------------------------
 // getCarouselLayout()
