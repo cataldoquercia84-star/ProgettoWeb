@@ -104,13 +104,10 @@
       </div>
       
       <div class="input-group">
-        <input id="login-password" type="password" placeholder="Password">
-        <!-- type="password": i caratteri sono nascosti (pallini) -->
-        
-        <button class="show-pass-btn" onclick="togglePassword('login-password', this)">👁</button>
-        <!-- bottone occhio per mostrare/nascondere la password -->
-        <!-- onclick="togglePassword('login-password', this)": chiama funzione con l'id dell'input e il bottone stesso -->
-        <!-- this si riferisce al bottone che è stato cliccato -->
+
+<input type="password" id="pwd">
+<button  onmousedown="showPassword('pwd')"   onmouseup="hidePassword('pwd')"   onmouseleave="hidePassword('pwd')">  👁</button>
+
       </div>
       
       <button class="login-btn" onclick="login()">Accedi</button>
@@ -140,8 +137,8 @@
       </div>
       
       <div class="input-group">
-        <input id="register-password" type="password" placeholder="Password (min. 8 caratteri, maiuscola, minuscola, numero, speciale)">
-        <button class="show-pass-btn" onclick="togglePassword('register-password', this)">👁</button>
+       <input type="password" id="pwd">
+<button  onmousedown="showPassword('pwd')"   onmouseup="hidePassword('pwd')"   onmouseleave="hidePassword('pwd')">  👁</button>
       </div>
       
       <button class="login-btn" onclick="register()">Crea Account</button>
