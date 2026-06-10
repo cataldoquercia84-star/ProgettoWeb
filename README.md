@@ -1,76 +1,64 @@
 
-CODEX HUB - BIBLIOTECA DIGITALE
+# Codex Hub - Biblioteca Digitale
 
-COME SI INSTALLA (in locale)
 
--Apri il terminale nella cartella backend  
+Questo file contiene le istruzioni per avviare e testare il progetto "Codex Hub", realizzato per l'esame di Tecnologia e Web. 
 
--Installa le dipendenze:
-   npm install
-   
--Avvia il server:
-   npm start
-   
--Apri il browser su:
-   http://localhost: porta selezionata...di default usa la 3000
-   
-Il terminale deve restare aperto. Per spegnere il server premi Ctrl+C.
+## 🛠 Come installare e avviare il progetto (in locale)
 
-DA REMOTO:
+1. Apri il terminale e posizionati all'interno della cartella backend del progetto.
+2. Installa le dipendenze necessarie con il comando:
+  npm install
+      Fai partire il server eseguendo:
+  npm start
+Apri il browser e vai all'indirizzo http://localhost:3000 (o la porta indicata nel terminale).
+
+Nota: Il terminale deve restare aperto per mantenere il server attivo. Per spegnerlo, premi Ctrl+C nel terminale.
+
+🌐 Link remoto
+Il progetto è stato caricato online ed è raggiungibile a questo indirizzo:
 https://progettoweb-s6il.onrender.com
 
-PRIMO ACCESSO (AMMINISTRATORE)
-
-amministratore si crea alla creazione del DB
+👑 Primo accesso (Amministratore)
+Alla creazione del database (che avviene in automatico al primo avvio), viene generato un account di default per accedere subito come amministratore.
 
 Username: Admin
+
 Password: Admin$1234
 
-Con questo account puoi gestire tutto.
+Con questo account è possibile gestire l'intero catalogo e gli utenti.
 
+👤 Cosa può fare un Utente normale
+Registrarsi: È richiesta una password sicura (minimo 8 caratteri, almeno una lettera maiuscola, una minuscola, un numero e un carattere speciale come $!@#).
 
-COSA PUO' FARE UN UTENTE NORMALE
+Accedere: Tramite il modulo di login.
 
-- Registrarsi (password: almeno 8 caratteri, una maiuscola, una minuscola,
-  un numero e un carattere speciale come $!@#)
-- Accedere
-- Sfogliare i libri disponibili (quelli già in prestito non compaiono)
-- Prenotare un libro
-- Vedere i propri prestiti con la scadenza
-- Restituire il libro
+Sfogliare il catalogo: Visualizzazione dei libri disponibili. I libri esauriti (0 copie) presentano un bordo rosso e non sono prenotabili.
 
+Prenotare un libro: La disponibilità scala in automatico. Il prestito ha una durata fissa di 30 giorni.
 
-COSA PUO' FARE L'AMMINISTRATORE
+Gestire i prestiti: Visualizzare i libri attualmente in prestito con i giorni rimanenti alla scadenza.
 
+Restituire un libro: Ripristina la copia nel database.
 
-- Aggiungere nuovi libri (titolo, autore, copie, foto di copertina - Se non si mette un'immagine per un nuovo libro, viene usata default.jpg)
-- Aumentare le copie di un libro
-- Diminuire le copie di un libro
-- Eliminare un libro 
-- Vedere statistiche: numero libri, copie totali, prestiti attivi,
-  i 5 libri più prestati nell'ultimo mese
-- Vedere la lista degli utenti registrati
+⚙️ Cosa può fare l'Amministratore
+Oltre alle funzionalità di base, l'admin ha un'area dedicata per:
 
-SE UTENTE PERDE PASSWORD 
+Aggiungere nuovi libri: Inserendo titolo, autore, numero di copie e caricando una foto di copertina (se non viene inserita, il sistema ne usa una di default).
 
--Clicca su "Password dimenticata?"
--inserisci il tuo username 
--il sistema ti dà una password temporanea (copiala subito)
--accedi con quella 
--il sistema ti obbliga a crearne una nuova
+Gestire l'inventario: Aumentare o diminuire le copie dei libri già presenti.
 
-La password temporanea si vede una volta sola. Se la perdi, ripeti la procedura.
+Eliminare titoli: Rimuove definitivamente un libro e tutti i prestiti ad esso associati.
 
-IN PIU'
+Monitorare statistiche: Vedere il numero totale dei libri, il totale delle copie, i prestiti attivi e la top 5 dei libri più prestati negli ultimi 30 giorni.
 
-- I libri con zero copie hanno la riga rossa 
-- la durata del prestito è di 30 giorni
+Elenco utenti: Visualizzare la lista di tutti gli utenti registrati a sistema.
 
+🔑 Recupero Password Dimenticata
+È previsto un flusso per chi smarrisce la password:
 
+Cliccare su "Password dimenticata?" e inserire il proprio username.
 
+Il sistema genera una password temporanea a schermo. Deve essere copiata subito, perché viene mostrata una volta sola.
 
-
-
-
-
-
+Al successivo login con la password temporanea, il sistema blocca l'accesso e obbliga l'utente a impostare una nuova password sicura definitiva prima di procedere.
