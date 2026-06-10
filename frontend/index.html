@@ -104,15 +104,15 @@
         <!-- placeholder: testo grigio che scompare quando scrivo -->
       </div>
       
-      <div class="input-group">
-        <input id="login-password" type="password" placeholder="Password">
-        <!-- type="password": i caratteri sono nascosti (pallini) -->
-        
-       <button type="button" class="show-pass-btn" data-target="login-password">👁</button>
-        <!-- bottone occhio per mostrare/nascondere la password -->
-        <!-- onclick="togglePassword('login-password', this)": chiama funzione con l'id dell'input e il bottone stesso -->
-        <!-- this si riferisce al bottone che è stato cliccato -->
-      </div>
+<div class="input-group">
+  <input id="login-password" type="password" placeholder="Password">
+
+  <button type="button"
+          class="show-pass-btn"
+          data-target="login-password">
+    👁
+  </button>
+</div>
       
       <button class="login-btn" onclick="login()">Accedi</button>
       <!-- bottone principale di login -->
@@ -139,12 +139,15 @@
         <input id="register-user" type="text" placeholder="Scegli un username (es. Mario99)">
         <!-- placeholder più descrittivo per guidare l'utente -->
       </div>
-      
       <div class="input-group">
-        <input id="register-password" type="password" placeholder="Password (min. 8 caratteri, maiuscola, minuscola, numero, speciale)">
-        <button type="button" class="show-pass-btn" data-target="lregister-password">👁</button>
-        
-      </div>
+  <input id=register-password" type="password" placeholder="Password">
+
+  <button type="button"
+          class="show-pass-btn"
+          data-target="login-password">
+    👁
+  </button>
+
       
       <button class="login-btn" onclick="register()">Crea Account</button>
       
