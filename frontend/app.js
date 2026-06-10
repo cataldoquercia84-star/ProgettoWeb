@@ -903,16 +903,17 @@ async function loadAdminUsers() {
 // Cambia il testo del bottone da 👁 a 🙈
 // -------------------------------------------------------------------
 
-function showPassword(id) {
-  const input = document.getElementById(id);
-  input.type = "text";
-}
+window.togglePassword = function(id, btn) {
+    const input = document.getElementById(id);
 
-function hidePassword(id) {
-  const input = document.getElementById(id);
-  input.type = "password";
-}
-
+    if (input.type === "password") {
+        input.type = "text";
+        btn.textContent = "🙈";
+    } else {
+        input.type = "password";
+        btn.textContent = "👁";
+    }
+};
 
 // -------------------------------------------------------------------
 // getCarouselLayout()
