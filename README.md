@@ -8,10 +8,15 @@ COME SI INSTALLA (in locale)
 -Installa le dipendenze:
 
    npm install
+   
 -Avvia il server:
+
    npm start
+   
 -Apri il browser su:
+
    http://localhost: porta selezionata...di default usa la 3000
+   
 Il terminale deve restare aperto. Per spegnere il server premi Ctrl+C.
 
 DA REMOTO:
