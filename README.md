@@ -11,7 +11,7 @@ Questo file contiene le istruzioni per avviare e testare il progetto "Codex Hub"
   npm install
       Fai partire il server eseguendo:
   npm start
-Apri il browser e vai all'indirizzo http://localhost:3000 (o la porta indicata nel terminale).
+Apri il browser e vai all'indirizzo http://localhost: più la porta indicata nel terminale se non specificata sarà la 3000
 
 Nota: Il terminale deve restare aperto per mantenere il server attivo. Per spegnerlo, premi Ctrl+C nel terminale.
 
