@@ -12,7 +12,9 @@
   --rosso-esaurito: #ffe0e0;
   --bordo-esaurito: #cc0000;
 }
-
+.show-pass-btn {
+  user-select: none;
+}
 /* RESET e impostazioni base */
 /* * toglie margini e padding a TUTTI gli elementi */
 /* box-sizing: border-box fa sì che larghezza includa padding e bordo */
