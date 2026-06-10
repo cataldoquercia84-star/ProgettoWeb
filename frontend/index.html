@@ -1,1 +1,336 @@
 
+<!--
+  ====================================================================
+  FILE: index.html
+  DESCRIZIONE: Struttura principale della biblioteca digitale "Codex Hub"
+  ====================================================================
+  Questo file contiene la struttura HTML della pagina.
+  Tutti gli elementi sono organizzati per sezioni che vengono
+  mostrate/nascoste dinamicamente da JavaScript in base allo stato (loggato/non loggato)
+-->
+
+<!DOCTYPE html>
+<!-- dichiara che il documento è HTML5, il browser deve interpretarlo in modalità moderna -->
+
+<html lang="it">
+<!-- lang="it" specifica la lingua italiana, utile per screen reader e SEO -->
+
+<head>
+  <meta charset="UTF-8">
+  <!-- imposta la codifica dei caratteri a UTF-8, supporta tutti i caratteri speciali (è, à, €, ecc.) -->
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- viewport: controlla come la pagina viene scalata sui dispositivi mobili -->
+  <!-- width=device-width: larghezza = larghezza dello schermo del dispositivo -->
+  <!-- initial-scale=1.0: zoom iniziale al 100% -->
+  
+  <title>Codex Hub - Biblioteca Digitale</title>
+  <!-- titolo che appare nella scheda del browser -->
+  
+  <link rel="stylesheet" href="style.css">
+  <!-- collega il file CSS esterno, così posso separare stile e struttura -->
+</head>
+
+<body>
+  <!-- tutto ciò che è visibile nell'interfaccia va dentro body -->
+
+  <!-- ============================================== -->
+  <!-- SECTION 1: HEADER (BARRA SUPERIORE)            -->
+  <!-- ============================================== -->
+  <header class="topbar">
+    <!-- header: elemento semantico per l'intestazione della pagina -->
+    
+    <div class="topbar-left">
+      <!-- div per il lato sinistro dell'header (logo e titolo) -->
+      
+      <h1 class="brand-title">
+        <!-- h1: titolo principale della pagina (unico per pagina, importante per SEO) -->
+        
+        <img src="logo.png" class="logo" alt="Logo Codex Hub">
+        <!-- img: immagine del logo -->
+        <!-- src="logo.png": percorso del file immagine -->
+        <!-- class="logo": per applicare stili CSS -->
+        <!-- alt="...": testo alternativo se l'immagine non carica, utile per screen reader -->
+        
+        CODΞX HUB
+        <!-- il nome vero e proprio, la Ξ è la lettera greca Xi (effetto estetico) -->
+      </h1>
+    </div>
+    
+    <div class="topbar-right">
+      <!-- lato destro dell'header -->
+      
+      <span id="server-status" class="server-offline">Server Offline</span>
+      <!-- span: contenitore inline, non va a capo -->
+      <!-- id="server-status": identificatore unico, JavaScript lo userà per aggiornare il testo -->
+      <!-- class="server-offline": stile iniziale (rosso), poi JavaScript cambierà la classe -->
+      
+      <span id="welcome-message" class="welcome-msg hidden"></span>
+      <!-- messaggio di benvenuto (es: "Benvenuto, Mario") -->
+      <!-- class="hidden": inizialmente nascosto, mostrato solo dopo login -->
+      
+      <button id="auth-button" onclick="authAction()">Accedi</button>
+      <!-- button: bottone cliccabile -->
+      <!-- onclick="authAction()": quando cliccato, chiama la funzione authAction() definita in app.js -->
+      <!-- il testo cambierà in "Logout" dopo login -->
+    </div>
+  </header>
+
+  <!-- ============================================== -->
+  <!-- SECTION 2: CONTENITORE PRINCIPALE              -->
+  <!-- ============================================== -->
+  <div class="container">
+    <!-- div generico con classe container, gestisce la larghezza massima e i margini -->
+    
+    <!-- --------------------------------------------- -->
+    <!-- PANNELLO LOGIN                               -->
+    <!-- --------------------------------------------- -->
+    <div id="login-panel" class="card hidden">
+      <!-- id="login-panel": JavaScript lo mostra/nasconde -->
+      <!-- class="card": stile card (sfondo bianco, ombra, bordi arrotondati) -->
+      <!-- class="hidden": inizialmente nascosto, appare quando l'utente clicca "Accedi" -->
+      
+      <h2>Accedi</h2>
+      <!-- titolo della card -->
+      
+      <div class="input-group">
+        <!-- input-group: contenitore per input + bottone occhio -->
+        
+        <input id="login-user" type="text" placeholder="Nome utente">
+        <!-- input: campo di testo -->
+        <!-- id="login-user": JavaScript legge il valore da questo campo -->
+        <!-- type="text": campo di testo normale -->
+        <!-- placeholder: testo grigio che scompare quando scrivo -->
+      </div>
+      
+      <div class="input-group">
+        <input id="login-password" type="password" placeholder="Password">
+        <!-- type="password": i caratteri sono nascosti (pallini) -->
+        
+        <button class="show-pass-btn" onclick="togglePassword('login-password', this)">👁</button>
+        <!-- bottone occhio per mostrare/nascondere la password -->
+        <!-- onclick="togglePassword('login-password', this)": chiama funzione con l'id dell'input e il bottone stesso -->
+        <!-- this si riferisce al bottone che è stato cliccato -->
+      </div>
+      
+      <button class="login-btn" onclick="login()">Accedi</button>
+      <!-- bottone principale di login -->
+      
+      <p class="switch-auth">
+        <!-- p: paragrafo -->
+        Non hai un account? 
+        <a href="#" onclick="showRegister()">Registrati ora</a>
+        <!-- a: link, href="#" non porta a nessuna pagina, onclick esegue JavaScript -->
+      </p>
+      
+      <p class="switch-auth">
+        <a href="#" onclick="requestPasswordReset()">Password dimenticata?</a>
+      </p>
+    </div>
+
+    <!-- --------------------------------------------- -->
+    <!-- PANNELLO REGISTRAZIONE                       -->
+    <!-- --------------------------------------------- -->
+    <div id="register-panel" class="card hidden">
+      <h2>Registrati</h2>
+      
+      <div class="input-group">
+        <input id="register-user" type="text" placeholder="Scegli un username (es. Mario99)">
+        <!-- placeholder più descrittivo per guidare l'utente -->
+      </div>
+      
+      <div class="input-group">
+        <input id="register-password" type="password" placeholder="Password (min. 8 caratteri, maiuscola, minuscola, numero, speciale)">
+        <button class="show-pass-btn" onclick="togglePassword('register-password', this)">👁</button>
+      </div>
+      
+      <button class="login-btn" onclick="register()">Crea Account</button>
+      
+      <p class="switch-auth">
+        Hai già un account? 
+        <a href="#" onclick="showLogin()">Accedi</a>
+      </p>
+    </div>
+
+    <!-- --------------------------------------------- -->
+    <!-- SEZIONE LIBRI (CATALOGO)                     -->
+    <!-- --------------------------------------------- -->
+    <div id="books-section" class="card">
+      <!-- questa sezione è SEMPRE visibile sia per loggati che non loggati -->
+      <!-- ma cambia il contenuto al suo interno -->
+      
+      <h2 id="catalog-title">📚 Esplora il nostro Catalogo</h2>
+      <!-- id="catalog-title": JavaScript cambia il testo in base al contesto -->
+      
+      <!-- Pulsanti di ordinamento -->
+      <div class="sort-controls">
+        <!-- sort-controls: contenitore flessibile per i bottoni -->
+        
+        <button class="sort-btn" data-sort="title" data-dir="asc" onclick="sortBooks('title', 'asc')">📖 Titolo ▲</button>
+        <!-- data-sort e data-dir: attributi personalizzati, JavaScript li legge per sapere come ordinare -->
+        <!-- ▲ simbolo di triangolo verso l'alto (crescente) -->
+        
+        <button class="sort-btn" data-sort="title" data-dir="desc" onclick="sortBooks('title', 'desc')">📖 Titolo ▼</button>
+        <!-- ▼ triangolo verso il basso (decrescente) -->
+        
+        <button class="sort-btn" data-sort="author" data-dir="asc" onclick="sortBooks('author', 'asc')">✍️ Autore ▲</button>
+        <button class="sort-btn" data-sort="author" data-dir="desc" onclick="sortBooks('author', 'desc')">✍️ Autore ▼</button>
+      </div>
+      
+      <!-- Carosello per utenti NON loggati -->
+      <div class="carousel-container" id="public-carousel-container">
+        <button class="carousel-btn prev" onclick="prevSlide()">❮</button>
+        <!-- prev: freccia sinistra per scorrere indietro -->
+        
+        <div id="books-list" class="carousel"></div>
+        <!-- id="books-list": JavaScript inserirà qui le card dei libri dinamicamente -->
+        
+        <button class="carousel-btn next" onclick="nextSlide()">❯</button>
+      </div>
+      
+      <!-- Pallini di navigazione del carosello -->
+      <div class="scroll-dots-container">
+        <div id="scroll-dots" class="scroll-dots"></div>
+        <!-- id="scroll-dots": JavaScript crea i pallini dinamicamente -->
+      </div>
+      
+      <!-- la lista libri per utente loggato viene aggiunta dinamicamente da JavaScript -->
+      <!-- non è scritta qui nell'HTML perché dipende dallo stato -->
+    </div>
+
+    <!-- --------------------------------------------- -->
+    <!-- SEZIONE PRESTITI UTENTE                      -->
+    <!-- --------------------------------------------- -->
+    <div id="loans-section" class="card hidden">
+      <!-- hidden: inizialmente nascosta, visibile solo a utenti normali (non admin) dopo login -->
+      
+      <h2>📖 I Tuoi Prestiti Attivi</h2>
+      <div id="loans-list"></div>
+      <!-- id="loans-list": JavaScript inserisce qui i prestiti dell'utente -->
+    </div>
+
+    <!-- --------------------------------------------- -->
+    <!-- SEZIONE AMMINISTRATORE                       -->
+    <!-- --------------------------------------------- -->
+    <div id="admin-section" class="card hidden">
+      <!-- hidden: visibile solo a utenti con ruolo "admin" -->
+      
+      <h2>👑 Area Amministratore</h2>
+
+      <!-- SOTTO-SEZIONE: AGGIUNTA NUOVO LIBRO -->
+      <h3>➕ Aggiungi nuovo libro</h3>
+      
+      <input id="new-title" type="text" placeholder="Titolo del libro">
+      <!-- id="new-title": JavaScript legge il valore -->
+      
+      <input id="new-author" type="text" placeholder="Autore">
+      <input id="new-copies" type="number" placeholder="Numero copie" min="1" value="1">
+      <!-- type="number": campo numerico, ha le freccette per aumentare/diminuire -->
+      <!-- min="1": minimo 1, non si può mettere 0 -->
+      <!-- value="1": valore predefinito -->
+      
+      <label style="display:block; margin: 10px 0 5px 0; font-weight:bold;">📷 Immagine copertina:</label>
+      <!-- label: etichetta per il campo file, style inline per semplicità -->
+      
+      <input id="new-image" type="file" accept="image/*" style="border:none; padding:5px 0;">
+      <!-- type="file": selettore file, accept="image/*" accetta solo immagini -->
+      
+      <button onclick="addNewBook()" class="login-btn" style="margin-top:10px;">📚 Aggiungi libro</button>
+
+      <hr style="margin: 25px 0; border: 0; border-top: 1px solid #d6c7b2;">
+      <!-- hr: riga orizzontale di separazione -->
+
+      <!-- SOTTO-SEZIONE: INVENTARIO E PRESTITI -->
+      <h3>📋 Stato Inventario & Prestiti Attivi</h3>
+      
+      <!-- Pulsanti di ordinamento per admin -->
+      <div class="sort-controls">
+        <button class="sort-btn admin-sort" data-sort="title" data-dir="asc" onclick="sortAdminBooks('title', 'asc')">📖 Titolo ▲</button>
+        <button class="sort-btn admin-sort" data-sort="title" data-dir="desc" onclick="sortAdminBooks('title', 'desc')">📖 Titolo ▼</button>
+        <button class="sort-btn admin-sort" data-sort="author" data-dir="asc" onclick="sortAdminBooks('author', 'asc')">✍️ Autore ▲</button>
+        <button class="sort-btn admin-sort" data-sort="author" data-dir="desc" onclick="sortAdminBooks('author', 'desc')">✍️ Autore ▼</button>
+      </div>
+      
+      <div id="admin-loans-list" style="margin-top: 15px;"></div>
+      <!-- id="admin-loans-list": JavaScript inserisce l'inventario completo -->
+
+      <hr>
+
+      <!-- SOTTO-SEZIONE: STATISTICHE -->
+      <h3>📊 Statistiche Generali</h3>
+      <div id="admin-stats" style="line-height: 1.6;"></div>
+      <!-- id="admin-stats": JavaScript inserisce numero libri, copie, prestiti -->
+      
+      <h4 style="margin-top: 20px; font-size:1.1em; color:var(--nero);">🔥 I più prestati negli ultimi 30 giorni</h4>
+      <div id="admin-top-borrowed" style="margin-top: 10px;"></div>
+
+      <hr>
+
+      <!-- SOTTO-SEZIONE: LISTA UTENTI REGISTRATI -->
+      <h3>👥 Utenti Registrati</h3>
+      <div id="admin-users-list" class="users-list"></div>
+    </div>
+  </div>
+
+  <!-- ============================================== -->
+  <!-- SECTION 3: MODALI (FINESTRE POPUP)            -->
+  <!-- ============================================== -->
+
+  <!-- MODALE CAMBIO PASSWORD (dopo reset o password temporanea) -->
+  <div id="change-password-modal" class="modal">
+    <!-- class="modal": sfondo scuro che copre tutta la pagina -->
+    
+    <div class="modal-content">
+      <!-- contenuto bianco centrato -->
+      
+      <h3>Cambia password temporanea</h3>
+      <p>Devi impostare una nuova password per completare l'accesso.</p>
+      <p><small>Requisiti: almeno 8 caratteri, una maiuscola, una minuscola, un numero, un carattere speciale.</small></p>
+      <!-- small: testo più piccolo -->
+      
+      <input type="password" id="new-password-input" placeholder="Nuova password" autocomplete="off">
+      <!-- autocomplete="off": disabilita il salvaggio automatico password del browser -->
+      
+      <input type="password" id="confirm-password-input" placeholder="Conferma nuova password" autocomplete="off">
+      
+      <button onclick="submitPasswordChange()">Cambia password</button>
+    </div>
+  </div>
+
+  <!-- MODALE PASSWORD TEMPORANEA GENERATA (con bottone copia) -->
+  <div id="temp-password-modal" class="modal">
+    <div class="modal-content">
+      <h3>🔑 Password Temporanea Generata</h3>
+      <p>Usa questa password per accedere. Dovrai cambiarla al primo accesso.</p>
+      
+      <div class="temp-password-box">
+        <!-- contenitore flessibile per input + bottone copia -->
+        
+        <input type="text" id="temp-password-display" readonly>
+        <!-- readonly: l'utente non può modificare il testo, ma può selezionarlo -->
+        
+        <button id="copy-temp-password-btn">📋 Copia</button>
+      </div>
+      
+      <button onclick="closeTempPasswordModal()">Chiudi</button>
+    </div>
+  </div>
+
+  <!-- ============================================== -->
+  <!-- SECTION 4: FOOTER (PIE DI PAGINA)             -->
+  <!-- ============================================== -->
+  <footer class="footer">
+    <p>© 2026 Biblioteca Digitale – Esame Tecnologia e Web</p>
+    <!-- footer: elemento semantico per il piè di pagina -->
+    <!-- ©: codice HTML per il simbolo di copyright -->
+  </footer>
+
+  <!-- ============================================== -->
+  <!-- SECTION 5: SCRIPT JAVASCRIPT                  -->
+  <!-- ============================================== -->
+  <script src="app.js"></script>
+  <!-- collega il file JavaScript esterno -->
+  <!-- va messo alla fine del body perché il browser deve caricare l'HTML prima -->
+  <!-- così JavaScript può trovare gli elementi con getElementById -->
+</body>
+</html>
