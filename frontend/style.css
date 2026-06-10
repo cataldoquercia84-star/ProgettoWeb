@@ -13,6 +13,31 @@
   --bordo-esaurito: #cc0000;
 }
 
+.password-group {
+  position: relative;
+}
+
+.password-group input {
+  width: 100%;
+  padding-right: 40px; /* spazio per l'icona */
+}
+
+.toggle-password {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  user-select: none;
+  font-size: 18px;
+  opacity: 0.6;
+  transition: opacity 0.2s;
+}
+
+.toggle-password:hover {
+  opacity: 1;
+}
+
 /* RESET e impostazioni base */
 /* * toglie margini e padding a TUTTI gli elementi */
 /* box-sizing: border-box fa sì che larghezza includa padding e bordo */
