@@ -904,13 +904,26 @@ async function loadAdminUsers() {
 // -------------------------------------------------------------------
 
 document.querySelectorAll(".show-pass-btn").forEach(btn => {
-  btn.addEventListener("click", () => {
-    const input = document.getElementById(btn.dataset.target);
+  const input = document.getElementById(btn.dataset.target);
 
-    const isHidden = input.type === "password";
-    input.type = isHidden ? "text" : "password";
-    btn.textContent = isHidden ? "🙈" : "👁";
-  });
+  function show() {
+    input.type = "text";
+    btn.textContent = "🙈";
+  }
+
+  function hide() {
+    input.type = "password";
+    btn.textContent = "👁";
+  }
+
+  // Desktop
+  btn.addEventListener("mousedown", show);
+  btn.addEventListener("mouseup", hide);
+  btn.addEventListener("mouseleave", hide);
+
+  // Mobile
+  btn.addEventListener("touchstart", show);
+  btn.addEventListener("touchend", hide);
 });
 
 // -------------------------------------------------------------------
