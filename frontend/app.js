@@ -80,6 +80,22 @@ function validatePassword(password) {
   return true;
 }
 
+// Mostra la password mentre tieni premuto
+function showPassword(id) {
+  const input = document.getElementById(id);
+  if (!input) return;
+
+  input.type = "text";
+}
+
+// Nasconde la password quando rilasci
+function hidePassword(id) {
+  const input = document.getElementById(id);
+  if (!input) return;
+
+  input.type = "password";
+}
+
 // -------------------------------------------------------------------
 // RIFERIMENTI AGLI ELEMENTI DOM
 // Raccogliamo tutti gli elementi HTML in un unico oggetto "els"
