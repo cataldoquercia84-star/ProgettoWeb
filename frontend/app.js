@@ -903,24 +903,26 @@ async function loadAdminUsers() {
 // Cambia il testo del bottone da 👁 a 🙈
 // -------------------------------------------------------------------
 
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("mousedown", (e) => {
+  const btn = e.target.closest(".show-pass-btn");
+  if (!btn) return;
 
-  document.querySelectorAll(".show-pass-btn").forEach(btn => {
+  const input = document.getElementById(btn.dataset.target);
+  if (!input) return;
 
-    btn.addEventListener("click", () => {
-      const input = document.getElementById(btn.dataset.target);
-
-      const isHidden = input.type === "password";
-
-      input.type = isHidden ? "text" : "password";
-
-      btn.textContent = isHidden ? "🙈" : "👁";
-    });
-
-  });
-
+  input.type = "text";
+  btn.textContent = "🙈";
 });
 
+document.addEventListener("mouseup", () => {
+  document.querySelectorAll(".show-pass-btn").forEach(btn => {
+    const input = document.getElementById(btn.dataset.target);
+    if (!input) return;
+
+    input.type = "password";
+    btn.textContent = "👁";
+  });
+});
 // -------------------------------------------------------------------
 // getCarouselLayout()
 // Calcola layout del carosello: larghezza pagina, numero slide totali
