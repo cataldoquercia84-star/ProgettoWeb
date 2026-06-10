@@ -597,7 +597,7 @@ app.delete("/admin/deleteBook", (req, res) => {
       return res.status(400).json({ error: "Non puoi rimuovere più copie di quelle disponibili" });
     }
     
-    db.run("UPDATE books SET copies = copies - ? WHERE id = ?", [copies, bookId], (err) => {
+    db.run("UPDATE books SET copies = 0 WHERE id = ?", [copies, bookId], (err) => {
       if (err) return res.status(500).json({ error: err.message });
       res.json({ success: true });
     });
