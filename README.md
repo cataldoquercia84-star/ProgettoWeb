@@ -1,7 +1,7 @@
 
 CODEX HUB - BIBLIOTECA DIGITALE
 
-COME SI INSTALLA
+COME SI INSTALLA (in locale)
 
 1. Apri il terminale nella cartella dove hai messo i file
 
@@ -13,8 +13,12 @@ COME SI INSTALLA
 
 4. Apri il browser su:
    http://localhost: selezionata...di default usa la 3000
-
 Il terminale deve restare aperto. Per spegnere il server premi Ctrl+C.
+
+DA REMOTO:
+https://progettoweb-s6il.onrender.com
+
+
 
 
 PRIMO ACCESSO (AMMINISTRATORE)
