@@ -391,7 +391,11 @@ app.post("/borrow", (req, res) => {
   // quando un utente vuole prendere un libro in prestito
   
   const { userId, bookId } = req.body;
-  
+/*db.get("SELECT COUNT(*) as count FROM loans WHERE userId = ?", [userId], (err, row) => {
+    if (err) return res.status(500).json({ error: err.message });
+    if (row.count >= 3) {
+      return res.status(400).json({ error: "Hai già 3 libri in prestito. Restituiscine uno prima di prenderne un altro." });
+    } */
   // controllo 1: l'utente esiste e non è admin?
   db.get("SELECT role FROM users WHERE id = ?", [userId], (err, user) => {
     if (err) return res.status(500).json({ error: err.message });
@@ -446,6 +450,7 @@ app.post("/borrow", (req, res) => {
     });
   });
 });
+// });
 
 // ==============================================
 // SECTION 11: API RESTITUZIONE (POST /return)
