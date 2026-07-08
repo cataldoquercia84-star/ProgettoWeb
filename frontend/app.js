@@ -69,7 +69,7 @@ function escapeHtml(str) {
 // -------------------------------------------------------------------
 // validatePassword(password)
 // Verifica i requisiti: almeno 8 caratteri, maiuscola, minuscola, numero, carattere speciale
-// STESSA LOGICA DEL BACKEND (server.js) - devono combaciare!
+// STESSA LOGICA DEL BACKEND (server.js)
 // -------------------------------------------------------------------
 function validatePassword(password) {
   if (password.length < 8) return false;
